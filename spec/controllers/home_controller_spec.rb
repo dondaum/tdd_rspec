@@ -17,10 +17,10 @@ RSpec.describe HomeController, type: :controller do
     end
 
     describe "After a successfull login" do
-      pending it "should redirect to the secret page"
+     pending "should redirect to the secret page"
 
     end
-    
+
   end
 
   context 'when a user is logged out' do
