@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   }
 
   root 'home#index'
-  get 'secret', to: 'home#secret'
+
+  # root action for home controller
+  get 'secret',   to: 'home#secret'
+  get 'sidebar',  to: 'home#sidebar'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
