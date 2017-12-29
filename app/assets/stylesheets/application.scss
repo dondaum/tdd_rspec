@@ -29,15 +29,13 @@
  }
 
 // navar design for commercial buy now button
+//small screen sizes
 
-@media screen and (max-width: 480px)
-{
-    .navbar
-    {
-       margin: auto; /*or the margin that you need*/
-    }
-}
+#mobile-only {
+  display: none;
 
-@media screen and (min-width: 0px) and (max-width: 400px) {
-  #test { display: block; }  /* show it on small screens */
+  @media (max-width: 991px) {
+    display: block;
+    text-align: center;
+  }
 }
