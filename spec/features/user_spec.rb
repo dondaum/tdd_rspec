@@ -30,30 +30,63 @@ RSpec.feature "User Feature", :type => :feature do
   end
 
   context "Update user" do
-  #  before do
-  #    user = FactoryBot.create(:user)
-  #    login_as(user, :scope => :user, :run_callbacks => false)
-  #  end
 
-    #https://stackoverflow.com/questions/32628093/using-devise-in-rspec-feature-tests
-    # Issue: Devise is based on Warden Rack Middlewere that is only meant to be used by a controller
+    before(:each) do
+      @user = FactoryBot.create(:user)
+      sign_in @user
+    end
 
-  # let(:user) { FactoryBot.create(:user) }
-   #login_as(user, :scope => :user)
 
     scenario "should be successful" do
 
-      login_with_warden!
-      visit edit_user_registration_path(user)
-      within("form") do
+
+      visit edit_user_registration_path
+
+      within(:css, "form#edit_user") do
         fill_in 'Email', with: 'jane.doe@example.com'
+        fill_in "Current password", with: @user.password
       end
 
-      click_button 'Update User'
-      expect(page).to have_content 'User was successfully updated.'
+      click_button 'Update'
+      expect(page).to have_content 'Your account has been updated successfully.'
       expect(page).to have_content 'jane.doe@example.com'
+    end
+
+    scenario "should fail" do
+
+      visit edit_user_registration_path
+
+      within(:css, "form#edit_user") do
+        fill_in 'Email', with: ''
+        fill_in "Current password", with: @user.password
+      end
+
+      click_button 'Update'
+      expect(page).to have_content "Email can't be blank"
+
+    end
   end
- end
+
+  context "Destroy user"  do
+
+    before(:each) do
+      @user = FactoryBot.create(:user)
+      sign_in @user
+    end
+
+    scenario "should be successful", :js => true do
+
+      visit edit_user_registration_path
+
+      accept_confirm do
+        click_link 'Cancel my account'
+      end
+
+      expect(page).to have_content("Bye! Your account has been successfully cancelled. We hope to see you again soon.")
+
+    end
+  end
+
 
 
 end
