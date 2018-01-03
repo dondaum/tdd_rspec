@@ -45,6 +45,7 @@ group :test do
   gem 'capybara'
   gem "selenium-webdriver"
   gem 'database_cleaner'
+  gem 'faker'
 end
 
 group :development do
