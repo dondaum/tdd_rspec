@@ -4,7 +4,7 @@ RSpec.feature "User Feature", :type => :feature do
   context "Create a new user" do
 
     before(:each) do
-      visit visit new_user_registration_path
+      visit new_user_registration_path
       within(:css, "form#new_user") do
         fill_in "Password", with: "password"
         fill_in "Password confirmation", with: "password"
